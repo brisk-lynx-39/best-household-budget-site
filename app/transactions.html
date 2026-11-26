@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HomeLedger — Transactions</title>
+<meta name="description" content="Every transaction in the Rivera household's books: search, filter, add, edit, delete and export to CSV.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="transactions">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">▦</span><span>HomeLedger<small>Household Budget</small></span></a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="index.html" data-page="dashboard">Dashboard</a>
+      <a href="transactions.html" data-page="transactions">Transactions</a>
+      <a href="budget.html" data-page="budget">Budget</a>
+      <a href="planner.html" data-page="planner">50/30/20 Planner</a>
+      <a href="goals.html" data-page="goals">Goals</a>
+      <a href="reports.html" data-page="reports">Reports</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <div>
+      <h1>Transactions</h1>
+      <p class="lede js-tx-summary">Every entry in the month’s books — income in green, spending in red.</p>
+    </div>
+    <div class="month-switch" role="group" aria-label="Choose month">
+      <button type="button" class="arrow-btn js-month-prev" aria-label="Previous month">‹</button>
+      <strong class="js-month-label">November 2026</strong>
+      <button type="button" class="arrow-btn js-month-next" aria-label="Next month">›</button>
+    </div>
+  </div>
+
+  <p class="notice js-notice" hidden></p>
+
+  <section class="card" aria-label="Add a transaction">
+    <h2>Add a transaction</h2>
+    <p class="hint">Log income or spending. Pick a row’s Edit button below to change it instead — the form fills in for you.</p>
+    <form class="js-tx-form">
+      <div class="form-row">
+        <div><label for="tx-date">Date</label><input id="tx-date" name="date" type="date" required></div>
+        <div style="flex:2 1 220px"><label for="tx-desc">Description</label><input id="tx-desc" name="description" type="text" placeholder="e.g. Weekly shop — Whole Foods" required></div>
+        <div><label for="tx-cat">Category</label><select id="tx-cat" name="category"></select></div>
+        <div><label for="tx-type">Type</label><select id="tx-type" name="type"><option value="expense">Expense</option><option value="income">Income</option></select></div>
+        <div><label for="tx-amount">Amount ($)</label><input id="tx-amount" name="amount" type="number" min="0.01" step="0.01" placeholder="0.00" required></div>
+      </div>
+      <button class="btn amber" type="submit"><span class="js-submit-label">Add transaction</span></button>
+      <button class="btn ghost js-cancel-edit" type="button" hidden>Cancel edit</button>
+    </form>
+  </section>
+
+  <section class="card" aria-label="Transaction list">
+    <h2>The month’s books</h2>
+    <div class="form-row" style="margin-bottom:14px">
+      <div><label for="tx-filter">Category</label><select id="tx-filter" class="js-tx-filter"></select></div>
+      <div style="flex:2 1 220px"><label for="tx-search">Search descriptions</label><input id="tx-search" class="js-tx-search" type="text" placeholder="e.g. Costco, pizza, pharmacy…"></div>
+      <div style="flex:0 0 auto;align-self:end"><button class="btn ghost js-export" type="button">Download this month as CSV</button></div>
+    </div>
+    <table>
+      <thead><tr><th>Day</th><th>Description</th><th>Category</th><th class="num">Amount</th><th class="num"><span class="hide-phone">Actions</span></th></tr></thead>
+      <tbody class="js-tx-table"></tbody>
+    </table>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>HomeLedger — a demo household budget. All data stays in your browser (localStorage); nothing is sent anywhere.</span>
+    <span><button type="button" class="link-btn js-reset">Reset demo data</button> · <a href="budget.html">Check the budgets</a></span>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="charts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

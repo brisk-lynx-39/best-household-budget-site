@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HomeLedger — Household Budget Dashboard</title>
+<meta name="description" content="HomeLedger keeps the Rivera household's budget in one place: income, spending, category budgets, a 50/30/20 plan and savings goals.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="dashboard">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">▦</span><span>HomeLedger<small>Household Budget</small></span></a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="index.html" data-page="dashboard">Dashboard</a>
+      <a href="transactions.html" data-page="transactions">Transactions</a>
+      <a href="budget.html" data-page="budget">Budget</a>
+      <a href="planner.html" data-page="planner">50/30/20 Planner</a>
+      <a href="goals.html" data-page="goals">Goals</a>
+      <a href="reports.html" data-page="reports">Reports</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <div>
+      <h1>The Rivera household budget</h1>
+      <p class="lede">Maya and Daniel Rivera, Sofia (9) and Leo (6), in Maplewood. Everything below comes from their real books for the month shown — add a transaction and every figure on the page moves.</p>
+    </div>
+    <div class="month-switch" role="group" aria-label="Choose month">
+      <button type="button" class="arrow-btn js-month-prev" aria-label="Previous month">‹</button>
+      <strong class="js-month-label">November 2026</strong>
+      <button type="button" class="arrow-btn js-month-next" aria-label="Next month">›</button>
+    </div>
+  </div>
+
+  <p class="notice js-notice" hidden></p>
+
+  <section class="stats" aria-label="Month summary">
+    <div class="stat good">
+      <div class="label">Income</div>
+      <div class="value js-stat-income">$0.00</div>
+      <div class="sub">Paydays, tutoring and side income.</div>
+    </div>
+    <div class="stat">
+      <div class="label">Spending</div>
+      <div class="value js-stat-spending">$0.00</div>
+      <div class="sub">Everything except the savings transfer.</div>
+    </div>
+    <div class="stat good">
+      <div class="label">Moved to savings</div>
+      <div class="value js-stat-saved">$0.00</div>
+      <div class="sub js-stat-saved-sub"></div>
+    </div>
+    <div class="stat">
+      <div class="label">Left to spend</div>
+      <div class="value js-stat-left">$0.00</div>
+      <div class="sub js-stat-left-sub"></div>
+    </div>
+  </section>
+
+  <div class="grid-2">
+    <section class="card" aria-label="Spending by category">
+      <h2>Where the money went</h2>
+      <p class="hint">Spending by category, not counting the monthly savings transfer.</p>
+      <div class="donut-wrap">
+        <canvas class="js-donut" width="260" height="260" role="img" aria-label="Donut chart of spending by category"></canvas>
+        <ul class="legend js-legend"></ul>
+      </div>
+    </section>
+
+    <section class="card" aria-label="Budgets closest to their limit">
+      <h2>Budgets to watch</h2>
+      <p class="hint">The five categories closest to — or over — their monthly limit.</p>
+      <div class="js-budget-list"></div>
+      <p style="margin:14px 0 0"><a href="budget.html">See all category budgets →</a></p>
+    </section>
+  </div>
+
+  <div class="grid-2">
+    <section class="card" aria-label="Recent transactions">
+      <h2>Recent transactions</h2>
+      <p class="hint">The latest entries in the month’s books.</p>
+      <table>
+        <thead><tr><th>Day</th><th>Description</th><th>Category</th><th class="num">Amount</th></tr></thead>
+        <tbody class="js-recent"></tbody>
+      </table>
+      <p style="margin:14px 0 0"><a href="transactions.html">All transactions, with add, edit and delete →</a></p>
+    </section>
+
+    <section class="card" aria-label="Savings goals">
+      <h2>Savings goals</h2>
+      <p class="hint">What the household is building toward, and how far along each goal is.</p>
+      <div class="js-goals-snapshot"></div>
+      <p style="margin:14px 0 0"><a href="goals.html">All goals, and add money to one →</a></p>
+    </section>
+  </div>
+
+  <section class="card" aria-label="Quick add">
+    <h2>Quick add an expense</h2>
+    <p class="hint">Bought something? Log it here and the dashboard, budget and reports update at once. It is saved in this browser only.</p>
+    <form class="js-quick-add">
+      <div class="form-row">
+        <div><label for="qa-date">Date</label><input id="qa-date" name="date" type="date" required></div>
+        <div style="flex:2 1 220px"><label for="qa-desc">What was it?</label><input id="qa-desc" name="description" type="text" placeholder="e.g. Weekly shop — Whole Foods" required></div>
+        <div><label for="qa-cat">Category</label><select id="qa-cat" name="category"><option>Groceries</option><option>Dining Out</option><option>Transport</option><option>Utilities</option><option>Health</option><option>Kids</option><option>Fun</option><option>Shopping</option><option>Subscriptions</option><option>Housing</option><option>Other</option></select></div>
+        <div><label for="qa-amount">Amount ($)</label><input id="qa-amount" name="amount" type="number" min="0.01" step="0.01" placeholder="0.00" required></div>
+      </div>
+      <button class="btn amber" type="submit">Add expense</button>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>HomeLedger — a demo household budget. All data stays in your browser (localStorage); nothing is sent anywhere.</span>
+    <span><button type="button" class="link-btn js-reset">Reset demo data</button> · <a href="planner.html">Try the 50/30/20 planner</a></span>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="charts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

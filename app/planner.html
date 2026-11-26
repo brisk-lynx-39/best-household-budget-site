@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HomeLedger — 50/30/20 Planner</title>
+<meta name="description" content="Plan a household budget with the 50/30/20 rule: slide needs, wants and savings to fit your income, compare with real spending, and apply the plan to your budgets.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="planner">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">▦</span><span>HomeLedger<small>Household Budget</small></span></a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="index.html" data-page="dashboard">Dashboard</a>
+      <a href="transactions.html" data-page="transactions">Transactions</a>
+      <a href="budget.html" data-page="budget">Budget</a>
+      <a href="planner.html" data-page="planner">50/30/20 Planner</a>
+      <a href="goals.html" data-page="goals">Goals</a>
+      <a href="reports.html" data-page="reports">Reports</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <div>
+      <h1>The 50/30/20 planner</h1>
+      <p class="lede">The classic rule, in plain terms: about 50% of after-tax income for needs, 30% for wants, 20% for savings and extra debt payments. Move the sliders to fit your household, then check the plan against what the Riveras actually spent.</p>
+    </div>
+    <div class="month-switch" role="group" aria-label="Compare against month">
+      <button type="button" class="arrow-btn js-month-prev" aria-label="Previous month">‹</button>
+      <strong class="js-month-label">November 2026</strong>
+      <button type="button" class="arrow-btn js-month-next" aria-label="Next month">›</button>
+    </div>
+  </div>
+
+  <p class="notice js-notice" hidden></p>
+
+  <section class="card" aria-label="Your plan">
+    <h2>Your plan</h2>
+    <p class="hint">Needs and wants always add up to 100% with savings — drag one and the other two follow.</p>
+    <div class="field" style="max-width:320px">
+      <label for="plan-income">Monthly after-tax income ($)</label>
+      <input id="plan-income" class="js-plan-income" type="number" min="0" step="10" value="7845">
+    </div>
+    <div class="slider-row">
+      <div class="slider-top"><span>Needs — housing, groceries, transport, utilities, health, kids</span><output class="js-needs-out">50% · $0.00</output></div>
+      <input class="js-needs-slider" type="range" min="20" max="80" step="1" value="50" aria-label="Needs percentage">
+    </div>
+    <div class="slider-row">
+      <div class="slider-top"><span>Wants — dining out, fun, shopping, subscriptions</span><output class="js-wants-out">30% · $0.00</output></div>
+      <input class="js-wants-slider" type="range" min="5" max="60" step="1" value="30" aria-label="Wants percentage">
+    </div>
+    <div class="slider-row">
+      <div class="slider-top"><span>Savings — whatever is left</span><output class="js-save-out">20% · $0.00</output></div>
+    </div>
+    <div class="split-bar js-plan-split" aria-hidden="true"></div>
+    <div class="split-legend">
+      <span><span class="cat-dot" style="background:#1d4a38"></span>Needs</span>
+      <span><span class="cat-dot" style="background:#e8a33d"></span>Wants</span>
+      <span><span class="cat-dot" style="background:#2e7d5b"></span>Savings</span>
+    </div>
+    <p class="hint js-plan-summary" style="margin-top:14px"></p>
+    <button class="btn js-plan-apply" type="button">Apply this plan to my category budgets</button>
+  </section>
+
+  <section class="card" aria-label="Plan against reality">
+    <h2>Plan against reality</h2>
+    <p class="hint">The plan’s targets next to what the Riveras actually spent this month, grouped the same way.</p>
+    <table class="compare-table">
+      <thead><tr><th>Group</th><th class="num">Plan target</th><th class="num">Actually spent</th><th class="num">Difference</th></tr></thead>
+      <tbody class="js-plan-compare"></tbody>
+    </table>
+  </section>
+
+  <section class="card" aria-label="Making the rule fit">
+    <h2>Making the rule fit a real household</h2>
+    <ul class="insight-list">
+      <li><b>High housing costs?</b> In an expensive city, needs of 60% and savings of 15% still beat no plan at all — the split matters less than having one.</li>
+      <li><b>Count the transfer as savings.</b> The Riveras move $1,200 to savings on the 25th of every month, before they can spend it. Automatic beats willpower.</li>
+      <li><b>Wants are not waste.</b> Pizza night and the cinema are in the plan on purpose. A budget with no fun in it is a budget nobody keeps.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>HomeLedger — a demo household budget. All data stays in your browser (localStorage); nothing is sent anywhere.</span>
+    <span><button type="button" class="link-btn js-reset">Reset demo data</button> · <a href="goals.html">Set a savings goal</a></span>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="charts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
